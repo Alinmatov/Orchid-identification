@@ -28,6 +28,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
 import android.graphics.ImageFormat;
 import android.graphics.Matrix;
 import android.graphics.Point;
@@ -45,9 +46,11 @@ import android.hardware.camera2.TotalCaptureResult;
 import android.hardware.camera2.params.StreamConfigurationMap;
 import android.media.Image;
 import android.media.ImageReader;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v13.app.FragmentCompat;
 import android.support.v4.content.ContextCompat;
@@ -74,6 +77,7 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
 import me.cafecode.android.orchididentity.Constants;
+import me.cafecode.android.orchididentity.OrchidActivity;
 import me.cafecode.android.orchididentity.R;
 
 @TargetApi(21)
@@ -85,8 +89,9 @@ public class Camera2Fragment extends Fragment
      */
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
     private static final int REQUEST_CAMERA_PERMISSION = 1;
+    private static final int REQUEST_SELECT_PICTURE = 2;
     private static final String FRAGMENT_DIALOG = "dialog";
-    private static final int SELECT_PICTURE = 2;
+    private static final String LOG_TAG = Camera2Fragment.class.getSimpleName();
 
     static {
         ORIENTATIONS.append(Surface.ROTATION_0, 90);
@@ -489,6 +494,30 @@ public class Camera2Fragment extends Fragment
         }
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == REQUEST_SELECT_PICTURE) {
+                Uri imageUri =  data.getData();
+                try {
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), imageUri);
+
+                    FileOutputStream fileOutput = new FileOutputStream(mFile);
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutput);
+                    fileOutput.close();
+                    Log.d(LOG_TAG, mFile.toString());
+
+                    getActivity().startActivity(new Intent(getActivity(), OrchidActivity.class));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }
+    }
+
     /**
      * Sets up member variables related to camera.
      *
@@ -850,6 +879,10 @@ public class Camera2Fragment extends Fragment
 
             mCaptureSession.stopRepeating();
             mCaptureSession.capture(captureBuilder.build(), CaptureCallback, null);
+
+            // TODO: Start next activity
+            getActivity().startActivity(new Intent(getActivity(), OrchidActivity.class));
+
         } catch (CameraAccessException e) {
             e.printStackTrace();
         }
@@ -898,13 +931,6 @@ public class Camera2Fragment extends Fragment
                 break;
             }
             case R.id.info: {
-                /*Activity activity = getActivity();
-                if (null != activity) {
-                    new AlertDialog.Builder(activity)
-                            .setMessage(R.string.intro_message)
-                            .setPositiveButton(android.R.string.ok, null)
-                            .show();
-                }*/
                 pickPhotoFromGallery();
                 break;
             }
@@ -918,7 +944,7 @@ public class Camera2Fragment extends Fragment
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent,
-                "Select Picture"), SELECT_PICTURE);
+                "Select Picture"), REQUEST_SELECT_PICTURE);
     }
 
     private void setAutoFlash(CaptureRequest.Builder requestBuilder) {
