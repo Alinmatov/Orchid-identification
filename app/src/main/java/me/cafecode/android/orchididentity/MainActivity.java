@@ -27,8 +27,7 @@ public class MainActivity extends AppCompatActivity {
                         .replace(R.id.main_content, CameraFragment.newInstance("", ""))
                         .commit();
             } else {
-                // Min sdk 21
-                // Use Camera2 API
+                // Sdk 21, use Camera2 API
                 getFragmentManager().beginTransaction()
                         .replace(R.id.main_content, Camera2Fragment.newInstance())
                         .commit();

@@ -25,6 +25,7 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.ImageFormat;
@@ -85,6 +86,7 @@ public class Camera2Fragment extends Fragment
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
     private static final int REQUEST_CAMERA_PERMISSION = 1;
     private static final String FRAGMENT_DIALOG = "dialog";
+    private static final int SELECT_PICTURE = 2;
 
     static {
         ORIENTATIONS.append(Surface.ROTATION_0, 90);
@@ -896,16 +898,27 @@ public class Camera2Fragment extends Fragment
                 break;
             }
             case R.id.info: {
-                Activity activity = getActivity();
+                /*Activity activity = getActivity();
                 if (null != activity) {
                     new AlertDialog.Builder(activity)
                             .setMessage(R.string.intro_message)
                             .setPositiveButton(android.R.string.ok, null)
                             .show();
-                }
+                }*/
+                pickPhotoFromGallery();
                 break;
             }
         }
+    }
+
+    private void pickPhotoFromGallery() {
+        // in onCreate or any event where your want the user to
+        // select a file
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent,
+                "Select Picture"), SELECT_PICTURE);
     }
 
     private void setAutoFlash(CaptureRequest.Builder requestBuilder) {
