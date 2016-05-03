@@ -43,7 +43,7 @@ public class OrchidActivity extends AppCompatActivity {
 
                     // TODO: Segmentation
                     Mat cannyMat = new Mat(bitmap.getWidth(), bitmap.getHeight(), CvType.CV_8UC1);
-                    Imgproc.Canny(grayMat, cannyMat, 10, 80, 3, true);
+                    Imgproc.Canny(grayMat, cannyMat, 10, 180, 3, true);
                     Bitmap cannyBitmap = Bitmap.createBitmap(bitmap);
                     Utils.matToBitmap(cannyMat, cannyBitmap);
                     mSegmentationImage.setImageBitmap(cannyBitmap);
