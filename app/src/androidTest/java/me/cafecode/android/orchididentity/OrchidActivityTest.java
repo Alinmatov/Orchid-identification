@@ -10,8 +10,8 @@ import static java.lang.Thread.sleep;
 public class OrchidActivityTest {
 
     @Rule
-    public ActivityTestRule<OrchidActivity> activityTestRule =
-            new ActivityTestRule<>(OrchidActivity.class, false, false);
+    public ActivityTestRule<OrchidDetailActivity> activityTestRule =
+            new ActivityTestRule<>(OrchidDetailActivity.class, false, false);
 
     @Test
     public void ui() throws Exception {

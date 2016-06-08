@@ -77,6 +77,7 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
 import me.cafecode.android.orchididentity.Constants;
+import me.cafecode.android.orchididentity.OrchidDetailActivity;
 import me.cafecode.android.orchididentity.R;
 
 @TargetApi(21)
@@ -887,7 +888,7 @@ public class Camera2Fragment extends Fragment
     }
 
     private void startOrchidActivity() {
-        getActivity().startActivity(new Intent(getActivity(), OrchidActivity.class));
+        getActivity().startActivity(new Intent(getActivity(), OrchidDetailActivity.class));
     }
 
     /**
