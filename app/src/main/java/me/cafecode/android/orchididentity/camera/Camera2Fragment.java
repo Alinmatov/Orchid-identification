@@ -77,7 +77,6 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
 import me.cafecode.android.orchididentity.Constants;
-import me.cafecode.android.orchididentity.OrchidActivity;
 import me.cafecode.android.orchididentity.R;
 
 @TargetApi(21)
@@ -394,7 +393,7 @@ public class Camera2Fragment extends Fragment
      * @return The optimal {@code Size}, or an arbitrary one if none were big enough
      */
     private static Size chooseOptimalSize(Size[] choices, int textureViewWidth,
-            int textureViewHeight, int maxWidth, int maxHeight, Size aspectRatio) {
+                                          int textureViewHeight, int maxWidth, int maxHeight, Size aspectRatio) {
 
         // Collect the supported resolutions that are at least as big as the preview Surface
         List<Size> bigEnough = new ArrayList<>();
@@ -406,7 +405,7 @@ public class Camera2Fragment extends Fragment
             if (option.getWidth() <= maxWidth && option.getHeight() <= maxHeight &&
                     option.getHeight() == option.getWidth() * h / w) {
                 if (option.getWidth() >= textureViewWidth &&
-                    option.getHeight() >= textureViewHeight) {
+                        option.getHeight() >= textureViewHeight) {
                     bigEnough.add(option);
                 } else {
                     notBigEnough.add(option);
@@ -500,7 +499,7 @@ public class Camera2Fragment extends Fragment
 
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == REQUEST_SELECT_PICTURE) {
-                Uri imageUri =  data.getData();
+                Uri imageUri = data.getData();
                 try {
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), imageUri);
 
@@ -509,7 +508,7 @@ public class Camera2Fragment extends Fragment
                     fileOutput.close();
                     Log.d(LOG_TAG, mFile.toString());
 
-                    getActivity().startActivity(new Intent(getActivity(), OrchidActivity.class));
+                    startOrchidActivity();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -880,12 +879,15 @@ public class Camera2Fragment extends Fragment
             mCaptureSession.stopRepeating();
             mCaptureSession.capture(captureBuilder.build(), CaptureCallback, null);
 
-            // TODO: Start next activity
-            getActivity().startActivity(new Intent(getActivity(), OrchidActivity.class));
-
+            // Start next activity
+            startOrchidActivity();
         } catch (CameraAccessException e) {
             e.printStackTrace();
         }
+    }
+
+    private void startOrchidActivity() {
+        getActivity().startActivity(new Intent(getActivity(), OrchidActivity.class));
     }
 
     /**

@@ -1,0 +1,40 @@
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="me.cafecode.android.orchididentity.OrchidDetailFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/orchid_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/image_orchid"
+            android:scaleType="fitCenter"
+            android:src="@drawable/example_orchid_photo"/>
+
+        <TextView
+            android:id="@+id/orchid_name_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/orchid_image"
+            android:padding="@dimen/padding_medium"
+            style="@style/TextAppearance.AppCompat.Headline"
+            android:text="@string/example_orchid_name"/>
+
+        <TextView
+            android:id="@+id/orchid_description_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/orchid_name_text"
+            android:padding="@dimen/padding_medium"
+            android:text="@string/example_orchid_description"/>
+
+    </RelativeLayout>
+
+</android.support.design.widget.CoordinatorLayout>

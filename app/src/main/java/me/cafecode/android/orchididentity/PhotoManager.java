@@ -5,10 +5,6 @@ import android.graphics.BitmapFactory;
 
 import java.io.File;
 
-/**
- * Created by Natthawut Hemathulin on 5/2/16 AD.
- * Email: natthawut1991@gmail.com
- */
 public class PhotoManager {
 
     public PhotoManager() {

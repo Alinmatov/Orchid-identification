@@ -23,7 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".OrchidActivity">
+        <activity android:name=".OrchidDetailActivity">
         </activity>
     </application>
 
