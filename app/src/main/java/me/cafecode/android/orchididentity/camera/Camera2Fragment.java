@@ -447,6 +447,7 @@ public class Camera2Fragment extends Fragment
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mFile = new File(getActivity().getExternalFilesDir(null), Constants.PHOTO_NAME);
+        Log.d(LOG_TAG, "Target: " + mFile.getPath());
     }
 
     @Override
@@ -695,6 +696,11 @@ public class Camera2Fragment extends Fragment
      * Stops the background thread and its {@link Handler}.
      */
     private void stopBackgroundThread() {
+
+        if (mBackgroundThread == null) {
+            return;
+        }
+
         mBackgroundThread.quitSafely();
         try {
             mBackgroundThread.join();
