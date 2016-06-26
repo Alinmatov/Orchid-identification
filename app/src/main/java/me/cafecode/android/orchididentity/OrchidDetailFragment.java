@@ -7,20 +7,26 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 
 import java.io.File;
 
 import me.cafecode.android.orchididentity.api.ApiManager;
+import me.cafecode.android.orchididentity.api.ApiResponse;
 import me.cafecode.android.orchididentity.api.Orchid;
 import me.cafecode.android.orchididentity.api.ResponseCallback;
 import me.cafecode.android.orchididentity.photo.PhotoManager;
 
-public class OrchidDetailFragment extends Fragment implements ResponseCallback<Orchid> {
+public class OrchidDetailFragment extends Fragment implements ResponseCallback<ApiResponse> {
 
     private static final String ARG_IMAGE_ENERGY = "image_energy";
 
@@ -30,6 +36,10 @@ public class OrchidDetailFragment extends Fragment implements ResponseCallback<O
     private OnFragmentInteractionListener mListener;
     private File mFile;
     private ProgressDialog mLoadingDialog;
+    private TextView mOrchidNameText;
+    private Toolbar mToolBar;
+    private TextView mOrchidDetailText;
+    private ImageView mOrchidImage;
 
     public OrchidDetailFragment() {
         // Required empty public constructor
@@ -66,6 +76,14 @@ public class OrchidDetailFragment extends Fragment implements ResponseCallback<O
         final Bitmap photoBitmap = PhotoManager.getBitmap(mFile);
         photoImage.setImageBitmap(photoBitmap);
 
+        mOrchidImage = (ImageView) view.findViewById(R.id.orchid_header_image);
+        mOrchidNameText = (TextView) view.findViewById(R.id.orchid_name_text);
+        mOrchidDetailText = (TextView) view.findViewById(R.id.orchid_description_text);
+
+        setHasOptionsMenu(true);
+
+        mToolBar = (Toolbar) view.findViewById(R.id.toolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(mToolBar);
         callIdentifyOrchidEndpoint(mFile);
     }
 
@@ -107,8 +125,10 @@ public class OrchidDetailFragment extends Fragment implements ResponseCallback<O
     }
 
     @Override
-    public void onSuccess(Orchid response) {
+    public void onSuccess(ApiResponse response) {
         Toast.makeText(getActivity(), response.getMessage(), Toast.LENGTH_SHORT).show();
+
+        updateView(response.getOrchid());
     }
 
     @Override
@@ -117,6 +137,18 @@ public class OrchidDetailFragment extends Fragment implements ResponseCallback<O
     }
 
     //endregion
+
+    private void updateView(Orchid orchid) {
+        mToolBar.setTitle(orchid.getName());
+        mOrchidNameText.setText(orchid.getName());
+        mOrchidDetailText.setText(orchid.getDetail());
+
+        Glide.with(getActivity())
+                .load(orchid.getImageUrl())
+                .crossFade()
+                .centerCrop()
+                .into(mOrchidImage);
+    }
 
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);

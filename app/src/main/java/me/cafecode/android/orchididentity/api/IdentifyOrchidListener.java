@@ -4,22 +4,22 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class IdentifyOrchidListener implements Callback<Orchid> {
+public class IdentifyOrchidListener implements Callback<ApiResponse> {
 
-    private ResponseCallback<Orchid> mCallback;
+    private ResponseCallback<ApiResponse> mCallback;
 
-    public IdentifyOrchidListener(ResponseCallback<Orchid> callback) {
+    public IdentifyOrchidListener(ResponseCallback<ApiResponse> callback) {
         mCallback = callback;
 
         mCallback.startRequest();
     }
 
     @Override
-    public void onResponse(Call<Orchid> call, Response<Orchid> response) {
+    public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
 
         if (response.body() != null) {
-            final Orchid orchid = response.body();
-            mCallback.onSuccess(orchid);
+            final ApiResponse apiResponse = response.body();
+            mCallback.onSuccess(apiResponse);
         } else {
             mCallback.onFailure();
         }
@@ -28,7 +28,7 @@ public class IdentifyOrchidListener implements Callback<Orchid> {
     }
 
     @Override
-    public void onFailure(Call<Orchid> call, Throwable t) {
+    public void onFailure(Call<ApiResponse> call, Throwable t) {
         mCallback.onFailure();
         mCallback.endRequest();
     }

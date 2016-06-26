@@ -9,7 +9,7 @@ import retrofit2.Call;
 
 public class ApiManager {
 
-    public static Call<Orchid> identifyOrchid(File photoFile) {
+    public static Call<ApiResponse> identifyOrchid(File photoFile) {
 //        final RequestBody body = RequestBody.create(MediaType.parse("image/*"), photoFile);
 
         final RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), photoFile);
@@ -18,12 +18,12 @@ public class ApiManager {
         return new ApiBuilder().getEndpoint().identifyOrchid(body);
     }
 
-    public static void identifyOrchid(File photoFile, ResponseCallback<Orchid> callback) {
+    public static void identifyOrchid(File photoFile, ResponseCallback<ApiResponse> callback) {
         final RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), photoFile);
         final MultipartBody.Part body = MultipartBody.Part.createFormData("photo", photoFile.getName(), requestBody);
 
 
-        final Call<Orchid> call = new ApiBuilder().getEndpoint().identifyOrchid(body);
+        final Call<ApiResponse> call = new ApiBuilder().getEndpoint().identifyOrchid(body);
         final IdentifyOrchidListener listener = new IdentifyOrchidListener(callback);
         call.enqueue(listener);
     }

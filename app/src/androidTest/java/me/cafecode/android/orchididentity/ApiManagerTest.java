@@ -10,14 +10,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
 import me.cafecode.android.orchididentity.api.ApiManager;
-import me.cafecode.android.orchididentity.api.Orchid;
+import me.cafecode.android.orchididentity.api.ApiResponse;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -69,14 +68,14 @@ public class ApiManagerTest {
     @Test
     public void identifyOrchid_shouldSuccess() throws Exception {
 
-        ApiManager.identifyOrchid(photoFile).enqueue(new Callback<Orchid>() {
+        ApiManager.identifyOrchid(photoFile).enqueue(new Callback<ApiResponse>() {
             @Override
-            public void onResponse(Call<Orchid> call, Response<Orchid> response) {
+            public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
                 fail("Unexpected this error.");
             }
 
             @Override
-            public void onFailure(Call<Orchid> call, Throwable t) {
+            public void onFailure(Call<ApiResponse> call, Throwable t) {
                 t.printStackTrace();
                 fail("Unexpected this error.");
             }
