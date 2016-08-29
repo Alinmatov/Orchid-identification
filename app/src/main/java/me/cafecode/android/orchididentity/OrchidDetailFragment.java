@@ -139,12 +139,12 @@ public class OrchidDetailFragment extends Fragment implements ResponseCallback<A
     //endregion
 
     private void updateView(Orchid orchid) {
-        mToolBar.setTitle(orchid.getName());
-        mOrchidNameText.setText(orchid.getName());
-        mOrchidDetailText.setText(orchid.getDetail());
+        mToolBar.setTitle(orchid.getScienceName());
+        mOrchidNameText.setText(orchid.getScienceName());
+        mOrchidDetailText.setText(orchid.getNativePlace());
 
         Glide.with(getActivity())
-                .load(orchid.getImageUrl())
+                .load(orchid.getOrchidImage())
                 .crossFade()
                 .centerCrop()
                 .into(mOrchidImage);
