@@ -36,10 +36,19 @@ public class OrchidDetailFragment extends Fragment implements ResponseCallback<A
     private OnFragmentInteractionListener mListener;
     private File mFile;
     private ProgressDialog mLoadingDialog;
-    private TextView mOrchidNameText;
+    private TextView mScienceNameText;
     private Toolbar mToolBar;
-    private TextView mOrchidDetailText;
+    private TextView mNatureText;
     private ImageView mOrchidImage;
+    private TextView mOtherNameText;
+
+    private Orchid mOrchid;
+    private TextView mNativePlaceText;
+    private TextView mGeneralText;
+    private TextView mShootText;
+    private TextView mLeafText;
+    private TextView mFlowerText;
+    private TextView mBloomText;
 
     public OrchidDetailFragment() {
         // Required empty public constructor
@@ -77,8 +86,15 @@ public class OrchidDetailFragment extends Fragment implements ResponseCallback<A
         photoImage.setImageBitmap(photoBitmap);
 
         mOrchidImage = (ImageView) view.findViewById(R.id.orchid_header_image);
-        mOrchidNameText = (TextView) view.findViewById(R.id.orchid_name_text);
-        mOrchidDetailText = (TextView) view.findViewById(R.id.orchid_description_text);
+        mScienceNameText = (TextView) view.findViewById(R.id.orchid_science_name_text);
+        mOtherNameText = (TextView) view.findViewById(R.id.orchid_other_name_text);
+        mNativePlaceText = (TextView) view.findViewById(R.id.orchid_native_place_text);
+        mGeneralText = (TextView) view.findViewById(R.id.orchid_general_text);
+        mShootText = (TextView) view.findViewById(R.id.orchid_shoot_text);
+        mLeafText = (TextView) view.findViewById(R.id.orchid_leaf_text);
+        mFlowerText = (TextView) view.findViewById(R.id.orchid_flower_text);
+        mBloomText = (TextView) view.findViewById(R.id.orchid_bloom_text);
+        mNatureText = (TextView) view.findViewById(R.id.orchid_nature_text);
 
         setHasOptionsMenu(true);
 
@@ -127,8 +143,8 @@ public class OrchidDetailFragment extends Fragment implements ResponseCallback<A
     @Override
     public void onSuccess(ApiResponse response) {
         Toast.makeText(getActivity(), response.getMessage(), Toast.LENGTH_SHORT).show();
-
-        updateView(response.getOrchid());
+        mOrchid = response.getOrchid();
+        bindView();
     }
 
     @Override
@@ -138,13 +154,20 @@ public class OrchidDetailFragment extends Fragment implements ResponseCallback<A
 
     //endregion
 
-    private void updateView(Orchid orchid) {
-        mToolBar.setTitle(orchid.getScienceName());
-        mOrchidNameText.setText(orchid.getScienceName());
-        mOrchidDetailText.setText(orchid.getNativePlace());
+    private void bindView() {
+        mToolBar.setTitle(mOrchid.getScienceName());
+        mScienceNameText.setText(mOrchid.getScienceName());
+        mOtherNameText.setText(mOrchid.getOtherName());
+        mNativePlaceText.setText(mOrchid.getNativePlace());
+        mGeneralText.setText(mOrchid.getGeneral());
+        mShootText.setText(mOrchid.getShoot());
+        mLeafText.setText(mOrchid.getLeaf());
+        mFlowerText.setText(mOrchid.getFlower());
+        mBloomText.setText(mOrchid.getBloom());
+        mNatureText.setText(mOrchid.getNativePlace());
 
         Glide.with(getActivity())
-                .load(orchid.getOrchidImage())
+                .load(mOrchid.getOrchidImage())
                 .crossFade()
                 .centerCrop()
                 .into(mOrchidImage);

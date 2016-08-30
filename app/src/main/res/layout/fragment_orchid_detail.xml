@@ -11,9 +11,10 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:padding="@dimen/margin_medium">
 
             <ImageView
@@ -27,24 +28,64 @@
                 android:visibility="gone"/>
 
             <TextView
-                android:id="@+id/orchid_name_text"
+                android:id="@+id/orchid_science_name_text"
                 style="@style/TextAppearance.AppCompat.Headline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/orchid_image"
                 android:padding="@dimen/padding_medium"
-                android:text="@string/example_orchid_name"/>
+                android:text="@string/example_orchid_science_name"/>
 
             <TextView
-                android:id="@+id/orchid_description_text"
+                android:id="@+id/orchid_other_name_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/example_orchid_other_name"/>
+
+            <TextView
+                android:id="@+id/orchid_native_place_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/example_orchid_native_place"/>
+
+            <TextView
+                android:id="@+id/orchid_general_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/example_orchid_general"/>
+
+            <TextView
+                android:id="@+id/orchid_shoot_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/example_orchid_shoot"/>
+
+            <TextView
+                android:id="@+id/orchid_leaf_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/example_orchid_leaf"/>
+
+            <TextView
+                android:id="@+id/orchid_flower_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/example_orchid_flower"/>
+
+            <TextView
+                android:id="@+id/orchid_bloom_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/example_orchid_bloom"/>
+
+            <TextView
+                android:id="@+id/orchid_nature_text"
+                style="@style/TextAppearance.AppCompat.Body1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/orchid_name_text"
                 android:padding="@dimen/padding_medium"
-                style="@style/TextAppearance.AppCompat.Body1"
-                android:text="@string/example_orchid_description"/>
+                android:text="@string/example_orchid_nature"/>
 
-        </RelativeLayout>
+        </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
 

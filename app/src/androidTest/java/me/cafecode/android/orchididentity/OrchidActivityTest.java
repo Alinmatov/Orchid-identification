@@ -56,7 +56,7 @@ public class OrchidActivityTest {
         sleep(10000L);
 
         // Act
-        onView(withId(R.id.orchid_name_text)).check(matches(withText("กล้วยไม้สกุลแคทลียา Catt")));
+        onView(withId(R.id.orchid_science_name_text)).check(matches(withText("กล้วยไม้สกุลแคทลียา Catt")));
     }
 
 }
