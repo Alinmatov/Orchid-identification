@@ -18,14 +18,22 @@
         ]]>
     </string>
     <string name="image_orchid">Orchid image</string>
-    <string name="example_orchid_nature">แข็งแรง ปลูกเลี้ยงง่าย สามารถปรับตัวให้เข้ากับสภาพแวดล้อมได้ดี และเจริญเติบโตได้ในที่ที่มีอุณหภูมิสูงกว่า 28 องศาเซลเซียส แต่ระบบรากอ่อนแอ่ ต่อปริมาณเกลือที่สะสมในเครื่องปลูก ถ้าได้รับแสงค่อนข้างมากจะให้ดอกดก แต่มีสีซีดกว่าเมื่อปลูกในแสงรำไร</string>
+    <string name="example_orchid_nature"><strong>Nature</strong> แข็งแรง ปลูกเลี้ยงง่าย สามารถปรับตัวให้เข้ากับสภาพแวดล้อมได้ดี และเจริญเติบโตได้ในที่ที่มีอุณหภูมิสูงกว่า 28 องศาเซลเซียส แต่ระบบรากอ่อนแอ่ ต่อปริมาณเกลือที่สะสมในเครื่องปลูก ถ้าได้รับแสงค่อนข้างมากจะให้ดอกดก แต่มีสีซีดกว่าเมื่อปลูกในแสงรำไร</string>
     <string name="example_orchid_science_name">กล้วยไม้เอื้องช้างน้าว</string>
     <string name="process_photo">Photo processing…</string>
     <string name="example_orchid_other_name">รองเท้านารีเหลืองปราจีน เหลืองกาญจน์ เหลือง</string>
-    <string name="example_orchid_native_place">มีการกระจายพันธุ์ในพม่า เวียดนาม กัมพูชา และไทย ในจังหวัดสระบุรี อุดรธานี ปราจีนบุรี นครนายก จันทบุรี กาญจนบุรี และประจวบคีรีขันธ์ ซึ่งสูงจากระดับน้ำทะเล 300–1000 เมตร</string>
+    <string name="example_orchid_native_place"><strong>ถิ่นกำเนิด</strong> มีการกระจายพันธุ์ในพม่า เวียดนาม กัมพูชา และไทย ในจังหวัดสระบุรี อุดรธานี ปราจีนบุรี นครนายก จันทบุรี กาญจนบุรี และประจวบคีรีขันธ์ ซึ่งสูงจากระดับน้ำทะเล 300–1000 เมตร</string>
     <string name="example_orchid_general">มีการเจริญเติบโตแบบพืชอาศัยบนดิน และพืชอิงอาศัยบ้าง</string>
     <string name="example_orchid_shoot">มีพุ่มใบขนาด 15–18 ซม.</string>
     <string name="example_orchid_leaf">รูปขอบขนาน แผ่นใบเป็นรายตารางสีเขียวเข้มสลับเขียวเทา</string>
     <string name="example_orchid_flower">ออกเป็นช่อ หรือดอกเดี่ยว มี 1–2 ดอกต่อช่อ และมีขนนุ่มปกคลุมบนกาบรองและก้านช่อดอก เมื่อดอกบานเต็มที่ค่อนข้างกลม มีขนาด 6–9 ซม. กลีบดอกหนาและงุ้มงอมาด้านหน้า ส่วนกลีบนอกบน กลีบดอก กระเป๋า และโล่มีสีเหลือง และมีจุดสีม่วงแดงกระจายทั่ว โล่มีรูปทรงเป็นรูปหัวใจ ขนาด 1 ซม. ด้านบนหยักเป็นร่องลึก ด้านล่างหยักเป็นซี่ฟันเล็กๆ</string>
     <string name="example_orchid_bloom">เมื่อต้นสมบูรณ์เต็มที่</string>
+    <string name="orchid_native_place">ถิ่นกำเนิด</string>
+    <string name="orchid_detail_native_place"><![CDATA[<strong>ถิ่นกำเนิด</strong> %s]]></string>
+    <string name="orchid_detail_general"><![CDATA[<strong>ลักษณะทั่วไป</strong> %s]]></string>
+    <string name="orchid_detail_shoot"><![CDATA[<strong>ต้น</strong> %s]]></string>
+    <string name="orchid_detail_leaf"><![CDATA[<strong>ใบ</strong> %s]]></string>
+    <string name="orchid_detail_flower"><![CDATA[<strong>ดอก</strong> %s]]></string>
+    <string name="orchid_detail_bloom"><![CDATA[<strong>Bloom</strong> %s]]></string>
+    <string name="orchid_detail_nature"><![CDATA[<strong>nature</strong> %s]]></string>
 </resources>

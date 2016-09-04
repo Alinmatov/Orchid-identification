@@ -7,12 +7,31 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-    
+
     <style name="AppTheme.FullScreen" parent="AppTheme">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="Text"/>
+
+    <style name="Text.Title" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="Text.Subtitle" parent="TextAppearance.AppCompat.Subhead">
+
+    </style>
+
+    <style name="Text.Paragraph" parent="TextAppearance.AppCompat.Body1">
+        <item name="android:layout_marginTop">@dimen/margin_small</item>
+        <item name="android:textColor">@color/text_paragraph</item>
+    </style>
+
+    <style name="Text.Headline" parent="TextAppearance.AppCompat.Headline">
+
     </style>
 
 </resources>

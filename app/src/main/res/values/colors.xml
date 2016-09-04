@@ -8,4 +8,7 @@
     <color name="capture_button_center">#0477f2</color>
     <color name="camera_control_background">#000</color>
     <color name="capture_button_center_pressed">#0158b4</color>
+
+    <color name="text_paragraph">#212121</color>
+    <color name="text_line">#9e9e9e</color>
 </resources>

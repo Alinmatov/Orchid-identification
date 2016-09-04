@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -100,6 +101,8 @@ public class OrchidDetailFragment extends Fragment implements ResponseCallback<A
 
         mToolBar = (Toolbar) view.findViewById(R.id.toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(mToolBar);
+
+        // Get orchid endpoint
         callIdentifyOrchidEndpoint(mFile);
     }
 
@@ -142,7 +145,6 @@ public class OrchidDetailFragment extends Fragment implements ResponseCallback<A
 
     @Override
     public void onSuccess(ApiResponse response) {
-        Toast.makeText(getActivity(), response.getMessage(), Toast.LENGTH_SHORT).show();
         mOrchid = response.getOrchid();
         bindView();
     }
@@ -155,16 +157,38 @@ public class OrchidDetailFragment extends Fragment implements ResponseCallback<A
     //endregion
 
     private void bindView() {
-        mToolBar.setTitle(mOrchid.getScienceName());
+        mToolBar.setTitle("");
         mScienceNameText.setText(mOrchid.getScienceName());
         mOtherNameText.setText(mOrchid.getOtherName());
-        mNativePlaceText.setText(mOrchid.getNativePlace());
-        mGeneralText.setText(mOrchid.getGeneral());
-        mShootText.setText(mOrchid.getShoot());
-        mLeafText.setText(mOrchid.getLeaf());
-        mFlowerText.setText(mOrchid.getFlower());
-        mBloomText.setText(mOrchid.getBloom());
-        mNatureText.setText(mOrchid.getNativePlace());
+
+        mNativePlaceText.setText(Html.fromHtml(String.format(
+                getString(R.string.orchid_detail_native_place),
+                mOrchid.getNativePlace())));
+
+        mGeneralText.setText(Html.fromHtml(String.format(
+                getString(R.string.orchid_detail_general),
+                mOrchid.getGeneral())));
+
+
+        mShootText.setText(Html.fromHtml(String.format(
+                getString(R.string.orchid_detail_shoot),
+                mOrchid.getShoot())));
+
+        mLeafText.setText(Html.fromHtml(String.format(
+                getString(R.string.orchid_detail_leaf),
+                mOrchid.getLeaf())));
+
+        mFlowerText.setText(Html.fromHtml(String.format(
+                getString(R.string.orchid_detail_flower),
+                mOrchid.getFlower())));
+
+        mBloomText.setText(Html.fromHtml(String.format(
+                getString(R.string.orchid_detail_bloom),
+                mOrchid.getBloom())));
+
+        mNatureText.setText(Html.fromHtml(String.format(
+                getString(R.string.orchid_detail_nature),
+                mOrchid.getNature())));
 
         Glide.with(getActivity())
                 .load(mOrchid.getOrchidImage())

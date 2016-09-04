@@ -29,60 +29,76 @@
 
             <TextView
                 android:id="@+id/orchid_science_name_text"
-                style="@style/TextAppearance.AppCompat.Headline"
-                android:layout_width="wrap_content"
+                style="@style/Text.Title"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/padding_medium"
+                android:gravity="center_horizontal"
+                android:padding="@dimen/padding_small"
                 android:text="@string/example_orchid_science_name"/>
 
             <TextView
                 android:id="@+id/orchid_other_name_text"
+                style="@style/Text.Subtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
                 android:text="@string/example_orchid_other_name"/>
+
+            <View
+                android:layout_width="100dp"
+                android:layout_height="1dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:background="@color/text_line"/>
 
             <TextView
                 android:id="@+id/orchid_native_place_text"
+                style="@style/Text.Paragraph"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
                 android:text="@string/example_orchid_native_place"/>
 
             <TextView
                 android:id="@+id/orchid_general_text"
+                style="@style/Text.Paragraph"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/example_orchid_general"/>
 
             <TextView
                 android:id="@+id/orchid_shoot_text"
+                style="@style/Text.Paragraph"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/example_orchid_shoot"/>
 
             <TextView
                 android:id="@+id/orchid_leaf_text"
+                style="@style/Text.Paragraph"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/example_orchid_leaf"/>
 
             <TextView
                 android:id="@+id/orchid_flower_text"
+                style="@style/Text.Paragraph"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/example_orchid_flower"/>
 
             <TextView
                 android:id="@+id/orchid_bloom_text"
+                style="@style/Text.Paragraph"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/example_orchid_bloom"/>
 
             <TextView
                 android:id="@+id/orchid_nature_text"
-                style="@style/TextAppearance.AppCompat.Body1"
+                style="@style/Text.Paragraph"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/padding_medium"
                 android:text="@string/example_orchid_nature"/>
 
         </LinearLayout>
