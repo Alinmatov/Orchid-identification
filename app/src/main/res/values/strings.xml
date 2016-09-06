@@ -36,4 +36,5 @@
     <string name="orchid_detail_flower"><![CDATA[<strong>ดอก</strong> %s]]></string>
     <string name="orchid_detail_bloom"><![CDATA[<strong>Bloom</strong> %s]]></string>
     <string name="orchid_detail_nature"><![CDATA[<strong>nature</strong> %s]]></string>
+    <string name="photo">ภาพถ่าย</string>
 </resources>

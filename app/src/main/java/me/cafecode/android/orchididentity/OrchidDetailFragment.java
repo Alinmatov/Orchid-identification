@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -38,7 +39,6 @@ public class OrchidDetailFragment extends Fragment implements ResponseCallback<A
     private File mFile;
     private ProgressDialog mLoadingDialog;
     private TextView mScienceNameText;
-    private Toolbar mToolBar;
     private TextView mNatureText;
     private ImageView mOrchidImage;
     private TextView mOtherNameText;
@@ -81,7 +81,7 @@ public class OrchidDetailFragment extends Fragment implements ResponseCallback<A
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        ImageView photoImage = (ImageView) view.findViewById(R.id.orchid_image);
+        ImageView photoImage = (ImageView) view.findViewById(R.id.orchid_photo_image);
 
         final Bitmap photoBitmap = PhotoManager.getBitmap(mFile);
         photoImage.setImageBitmap(photoBitmap);
@@ -97,10 +97,17 @@ public class OrchidDetailFragment extends Fragment implements ResponseCallback<A
         mBloomText = (TextView) view.findViewById(R.id.orchid_bloom_text);
         mNatureText = (TextView) view.findViewById(R.id.orchid_nature_text);
 
+        CollapsingToolbarLayout collapsingToolbar =
+                (CollapsingToolbarLayout) view.findViewById(R.id.collapsing_toolbar);
+        collapsingToolbar.setTitle("");
+
         setHasOptionsMenu(true);
 
-        mToolBar = (Toolbar) view.findViewById(R.id.toolbar);
-        ((AppCompatActivity) getActivity()).setSupportActionBar(mToolBar);
+        // Set ActionBar
+        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        toolbar.setTitle("");
+        toolbar.setSubtitle("");
 
         // Get orchid endpoint
         callIdentifyOrchidEndpoint(mFile);
@@ -157,7 +164,6 @@ public class OrchidDetailFragment extends Fragment implements ResponseCallback<A
     //endregion
 
     private void bindView() {
-        mToolBar.setTitle("");
         mScienceNameText.setText(mOrchid.getScienceName());
         mOtherNameText.setText(mOrchid.getOtherName());
 
