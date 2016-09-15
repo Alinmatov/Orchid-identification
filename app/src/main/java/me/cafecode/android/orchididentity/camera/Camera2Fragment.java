@@ -612,8 +612,9 @@ public class Camera2Fragment extends Fragment
                     mTextureView.setAspectRatio(
                             mPreviewSize.getWidth(), mPreviewSize.getHeight());
                 } else {
-                    mTextureView.setAspectRatio(
-                            mPreviewSize.getHeight(), mPreviewSize.getWidth());
+//                    mTextureView.setAspectRatio(
+//                            mPreviewSize.getHeight(), mPreviewSize.getWidth());
+                    mTextureView.setAspectRatio(1, 1);
                 }
 
                 // Check if the flash is supported.
