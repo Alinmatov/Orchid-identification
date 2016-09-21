@@ -37,4 +37,8 @@
     <string name="orchid_detail_bloom"><![CDATA[<strong>Bloom</strong> %s]]></string>
     <string name="orchid_detail_nature"><![CDATA[<strong>nature</strong> %s]]></string>
     <string name="photo">ภาพถ่าย</string>
+    <string name="picture_taken">Take photo</string>
+    <string name="flash_auto">Flash auto</string>
+    <string name="flash_off">Flash off</string>
+    <string name="flash_on">Flash on</string>
 </resources>

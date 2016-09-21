@@ -20,18 +20,22 @@ public class MainActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         if (savedInstanceState == null) {
-            // Check min sdk < 21?
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                // Use Camera API
-                getFragmentManager().beginTransaction()
-                        .replace(R.id.main_content, CameraFragment.newInstance("", ""))
-                        .commit();
-            } else {
-                // Sdk 21, use Camera2 API
-                getFragmentManager().beginTransaction()
-                        .replace(R.id.main_content, Camera2Fragment.newInstance())
-                        .commit();
-            }
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.main_content, CameraFragment.newInstance())
+                    .commit();
+
+//            // Check min sdk < 21?
+//            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+//                // Use Camera API
+//                getFragmentManager().beginTransaction()
+//                        .replace(R.id.main_content, CameraFragment.newInstance("", ""))
+//                        .commit();
+//            } else {
+//                // Sdk 21, use Camera2 API
+//                getFragmentManager().beginTransaction()
+//                        .replace(R.id.main_content, Camera2Fragment.newInstance())
+//                        .commit();
+//            }
         }
     }
 }
