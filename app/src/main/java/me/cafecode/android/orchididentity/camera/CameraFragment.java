@@ -3,6 +3,7 @@ package me.cafecode.android.orchididentity.camera;
 
 import android.Manifest;
 import android.app.Fragment;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.android.cameraview.CameraView;
@@ -24,9 +26,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import me.cafecode.android.orchididentity.Constants;
+import me.cafecode.android.orchididentity.OrchidDetailActivity;
 import me.cafecode.android.orchididentity.R;
 
-public class CameraFragment extends Fragment {
+public class CameraFragment extends Fragment implements View.OnClickListener {
 
     private static final String TAG = CameraFragment.class.getSimpleName();
     private static final int REQUEST_CAMERA_PERMISSION = 1;
@@ -69,6 +73,9 @@ public class CameraFragment extends Fragment {
         if (mCameraView != null) {
             mCameraView.addCallback(mCallback);
         }
+
+        ImageButton takePhotoButton = (ImageButton) view.findViewById(R.id.picture);
+        takePhotoButton.setOnClickListener(this);
         return view;
     }
 
@@ -144,7 +151,7 @@ public class CameraFragment extends Fragment {
                     // This demo app saves the taken picture to a constant file.
                     // $ adb pull /sdcard/Android/data/com.google.android.cameraview.demo/files/Pictures/picture.jpg
                     File file = new File(getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES),
-                            "picture.jpg");
+                            Constants.PHOTO_NAME);
                     OutputStream os = null;
                     try {
                         os = new FileOutputStream(file);
@@ -161,10 +168,25 @@ public class CameraFragment extends Fragment {
                             }
                         }
                     }
+
+                    getActivity().startActivity(new Intent(getActivity(), OrchidDetailActivity.class));
                 }
             });
         }
 
     };
 
+    //region OnClickListener
+    @Override
+    public void onClick(View view) {
+
+        switch (view.getId()) {
+            case R.id.picture:
+                if (mCameraView != null) {
+                    mCameraView.takePicture();
+                }
+                break;
+        }
+    }
+    //endregion
 }

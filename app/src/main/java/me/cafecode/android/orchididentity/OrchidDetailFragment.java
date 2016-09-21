@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
@@ -67,7 +68,7 @@ public class OrchidDetailFragment extends Fragment implements ResponseCallback<A
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mFile = new File(getActivity().getExternalFilesDir(null), Constants.PHOTO_NAME);
+        mFile = new File(getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES), Constants.PHOTO_NAME);
     }
 
     @Override
