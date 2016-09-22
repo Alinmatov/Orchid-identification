@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.support.v4.app.ActivityCompat;
@@ -17,18 +16,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import com.google.android.cameraview.CameraView;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-
-import me.cafecode.android.orchididentity.Constants;
 import me.cafecode.android.orchididentity.OrchidDetailActivity;
 import me.cafecode.android.orchididentity.R;
+import me.cafecode.android.orchididentity.photo.PhotoManager;
 
 public class CameraFragment extends Fragment implements View.OnClickListener {
 
@@ -142,34 +135,13 @@ public class CameraFragment extends Fragment implements View.OnClickListener {
 
         @Override
         public void onPictureTaken(CameraView cameraView, final byte[] data) {
-            Log.d(TAG, "onPictureTaken " + data.length);
-            Toast.makeText(cameraView.getContext(), R.string.picture_taken, Toast.LENGTH_SHORT)
-                    .show();
             getBackgroundHandler().post(new Runnable() {
                 @Override
                 public void run() {
-                    // This demo app saves the taken picture to a constant file.
-                    // $ adb pull /sdcard/Android/data/com.google.android.cameraview.demo/files/Pictures/picture.jpg
-                    File file = new File(getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES),
-                            Constants.PHOTO_NAME);
-                    OutputStream os = null;
-                    try {
-                        os = new FileOutputStream(file);
-                        os.write(data);
-                        os.close();
-                    } catch (IOException e) {
-                        Log.w(TAG, "Cannot write to " + file, e);
-                    } finally {
-                        if (os != null) {
-                            try {
-                                os.close();
-                            } catch (IOException e) {
-                                // Ignore
-                            }
-                        }
-                    }
+                    // Save bitmap to file
+                    PhotoManager.saveBitmapToFile(getActivity(), data);
 
-                    getActivity().startActivity(new Intent(getActivity(), OrchidDetailActivity.class));
+                    startActivity(new Intent(getActivity(), OrchidDetailActivity.class));
                 }
             });
         }
