@@ -1,11 +1,9 @@
 package me.cafecode.android.orchididentity;
 
-import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.WindowManager;
 
-import me.cafecode.android.orchididentity.camera.Camera2Fragment;
 import me.cafecode.android.orchididentity.camera.CameraFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,19 +21,6 @@ public class MainActivity extends AppCompatActivity {
             getFragmentManager().beginTransaction()
                     .replace(R.id.main_content, CameraFragment.newInstance())
                     .commit();
-
-//            // Check min sdk < 21?
-//            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-//                // Use Camera API
-//                getFragmentManager().beginTransaction()
-//                        .replace(R.id.main_content, CameraFragment.newInstance("", ""))
-//                        .commit();
-//            } else {
-//                // Sdk 21, use Camera2 API
-//                getFragmentManager().beginTransaction()
-//                        .replace(R.id.main_content, Camera2Fragment.newInstance())
-//                        .commit();
-//            }
         }
     }
 }
