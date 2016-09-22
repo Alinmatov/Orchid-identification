@@ -1,9 +1,7 @@
 package me.cafecode.android.orchididentity;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -35,7 +33,6 @@ public class OrchidDetailFragment extends Fragment implements ResponseCallback<A
     @SuppressWarnings("unused")
     private static final String LOG_TAG = OrchidDetailFragment.class.getSimpleName();
 
-    private OnFragmentInteractionListener mListener;
     private File mFile;
     private ProgressDialog mLoadingDialog;
     private TextView mScienceNameText;
@@ -113,23 +110,6 @@ public class OrchidDetailFragment extends Fragment implements ResponseCallback<A
         callIdentifyOrchidEndpoint(mFile);
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
     //region Identify orchid endpoint
     private void callIdentifyOrchidEndpoint(File photoFile) {
         ApiManager.identifyOrchid(photoFile, this);
@@ -203,7 +183,4 @@ public class OrchidDetailFragment extends Fragment implements ResponseCallback<A
                 .into(mOrchidImage);
     }
 
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
-    }
 }

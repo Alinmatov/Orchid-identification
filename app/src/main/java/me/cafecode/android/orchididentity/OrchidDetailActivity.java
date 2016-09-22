@@ -1,11 +1,9 @@
 package me.cafecode.android.orchididentity;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-public class OrchidDetailActivity extends AppCompatActivity
-        implements OrchidDetailFragment.OnFragmentInteractionListener {
+public class OrchidDetailActivity extends AppCompatActivity {
 
     @SuppressWarnings("unused")
     private static final String LOG_TAG = OrchidDetailActivity.class.getSimpleName();
@@ -23,11 +21,6 @@ public class OrchidDetailActivity extends AppCompatActivity
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
-    }
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
     }
 
 }
