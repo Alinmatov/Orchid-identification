@@ -49,7 +49,7 @@ public class Camera2ActivityTest {
     public void canTakePhoto() throws Exception {
 
         // Act
-        onView(withId(R.id.picture)).perform(click());
+        onView(withId(R.id.capture_button)).perform(click());
 
         photoFile = new File(activityTestRule.getActivity().getExternalFilesDir(null), Constants.PHOTO_NAME);
         final Bitmap photoBitmap = PhotoManager.getBitmap(photoFile);

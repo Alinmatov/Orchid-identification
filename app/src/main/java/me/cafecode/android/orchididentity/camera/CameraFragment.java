@@ -2,13 +2,17 @@ package me.cafecode.android.orchididentity.camera;
 
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -19,6 +23,8 @@ import android.widget.ImageButton;
 
 import com.google.android.cameraview.CameraView;
 
+import java.io.IOException;
+
 import me.cafecode.android.orchididentity.OrchidDetailActivity;
 import me.cafecode.android.orchididentity.R;
 import me.cafecode.android.orchididentity.photo.PhotoManager;
@@ -27,6 +33,7 @@ public class CameraFragment extends Fragment implements View.OnClickListener {
 
     private static final String TAG = CameraFragment.class.getSimpleName();
     private static final int REQUEST_CAMERA_PERMISSION = 1;
+    private static final int REQUEST_SELECT_PICTURE = 12;
 
     private CameraView mCameraView;
     private Handler mBackgroundHandler;
@@ -67,8 +74,12 @@ public class CameraFragment extends Fragment implements View.OnClickListener {
             mCameraView.addCallback(mCallback);
         }
 
-        ImageButton takePhotoButton = (ImageButton) view.findViewById(R.id.picture);
+        ImageButton takePhotoButton = (ImageButton) view.findViewById(R.id.capture_button);
         takePhotoButton.setOnClickListener(this);
+
+        ImageButton galleryButton = (ImageButton) view.findViewById(R.id.gallery_button);
+        galleryButton.setOnClickListener(this);
+
         return view;
     }
 
@@ -139,9 +150,9 @@ public class CameraFragment extends Fragment implements View.OnClickListener {
                 @Override
                 public void run() {
                     // Save bitmap to file
-                    PhotoManager.saveBitmapToFile(getActivity(), data);
+                    PhotoManager.saveDataToFile(getActivity(), data);
 
-                    startActivity(new Intent(getActivity(), OrchidDetailActivity.class));
+                    startOrchidActivity();
                 }
             });
         }
@@ -153,12 +164,56 @@ public class CameraFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
 
         switch (view.getId()) {
-            case R.id.picture:
+            case R.id.capture_button:
                 if (mCameraView != null) {
                     mCameraView.takePicture();
                 }
                 break;
+            case R.id.gallery_button:
+                pickPhotoFromGallery();
+                break;
         }
     }
     //endregion
+
+    private void pickPhotoFromGallery() {
+        // in onCreate or any event where your want the user to
+        // select a file
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent,
+                "Select Picture"), REQUEST_SELECT_PICTURE);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == REQUEST_SELECT_PICTURE) {
+                final Uri imageUri = data.getData();
+
+                getBackgroundHandler().post(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            // Save file from gallery
+                            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), imageUri);
+                            PhotoManager.saveBitmapToFile(getActivity(), bitmap);
+
+                            startOrchidActivity();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
+            }
+        }
+    }
+
+    private void startOrchidActivity() {
+        startActivity(new Intent(getActivity(), OrchidDetailActivity.class));
+    }
 }

@@ -4,10 +4,12 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Log;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 
 import me.cafecode.android.orchididentity.Constants;
@@ -30,7 +32,7 @@ public class PhotoManager {
                 Constants.PHOTO_NAME);
     }
 
-    public static void saveBitmapToFile(Context context, byte[] data) {
+    public static void saveDataToFile(Context context, byte[] data) {
 
         Bitmap bmp;
         BitmapFactory.Options options = new BitmapFactory.Options();
@@ -57,5 +59,16 @@ public class PhotoManager {
         }
     }
 
+    public static void saveBitmapToFile(Context context, Bitmap bitmap) {
+        try {
+            File mFile = getFile(context);
+            FileOutputStream fileOutput = new FileOutputStream(mFile);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutput);
+            fileOutput.close();
+            Log.d(TAG, mFile.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
