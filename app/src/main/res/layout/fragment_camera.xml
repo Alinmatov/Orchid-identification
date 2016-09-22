@@ -27,6 +27,14 @@
         app:autoFocus="true"
         app:facing="back"/>
 
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/cameraview"
+        android:layout_alignTop="@id/cameraview"
+        android:layout_margin="24dp"
+        android:background="@drawable/viewfinder_guide"/>
+
     <FrameLayout
         android:id="@+id/control"
         android:layout_width="match_parent"
@@ -42,17 +50,17 @@
             android:layout_width="@dimen/capture_button_size"
             android:layout_height="@dimen/capture_button_size"
             android:layout_gravity="center"
-            android:contentDescription="@string/description_info"
-            android:background="@drawable/capture_button"/>
+            android:background="@drawable/capture_button"
+            android:contentDescription="@string/description_info"/>
 
         <ImageButton
             android:id="@+id/gallery_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|right"
+            android:background="@android:color/transparent"
             android:contentDescription="@string/description_info"
             android:padding="20dp"
-            android:background="@android:color/transparent"
             android:src="@drawable/ic_insert_photo_white_48dp"/>
 
     </FrameLayout>
