@@ -5,6 +5,6 @@ public interface ResponseCallback<T> {
     void startRequest();
     void endRequest();
     void onSuccess(T response);
-    void onFailure();
+    void onFailure(Throwable error);
 
 }

@@ -1,70 +1,49 @@
 package me.cafecode.android.orchididentity;
 
-import android.app.ProgressDialog;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
-import java.io.File;
-
-import me.cafecode.android.orchididentity.api.ApiManager;
-import me.cafecode.android.orchididentity.api.ApiResponse;
 import me.cafecode.android.orchididentity.api.Orchid;
-import me.cafecode.android.orchididentity.api.ResponseCallback;
-import me.cafecode.android.orchididentity.photo.PhotoManager;
 
-public class OrchidDetailFragment extends Fragment implements ResponseCallback<ApiResponse> {
+public class OrchidDetailFragment extends Fragment {
 
-    private static final String ARG_IMAGE_ENERGY = "image_energy";
-
-    @SuppressWarnings("unused")
-    private static final String LOG_TAG = OrchidDetailFragment.class.getSimpleName();
-
-    private File mFile;
-    private ProgressDialog mLoadingDialog;
     private TextView mScienceNameText;
-    private TextView mNatureText;
-    private ImageView mOrchidImage;
     private TextView mOtherNameText;
 
-    private Orchid mOrchid;
+    private TextView mNatureText;
     private TextView mNativePlaceText;
     private TextView mGeneralText;
     private TextView mShootText;
     private TextView mLeafText;
     private TextView mFlowerText;
     private TextView mBloomText;
+    private ImageView mPhotoImage;
+    private Orchid mOrchid;
 
-    public OrchidDetailFragment() {
-        // Required empty public constructor
-    }
-
-    public static OrchidDetailFragment newInstance(String imageEnergy) {
+    public static OrchidDetailFragment newInstance(Orchid orchid) {
         OrchidDetailFragment fragment = new OrchidDetailFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_IMAGE_ENERGY, imageEnergy);
+        args.putParcelable(Orchid.ARG_ORCHID, orchid);
         fragment.setArguments(args);
         return fragment;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        mFile = PhotoManager.getFile(getActivity());
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            mOrchid = bundle.getParcelable(Orchid.ARG_ORCHID);
+        }
     }
 
     @Override
@@ -78,12 +57,7 @@ public class OrchidDetailFragment extends Fragment implements ResponseCallback<A
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        ImageView photoImage = (ImageView) view.findViewById(R.id.orchid_photo_image);
-
-        final Bitmap photoBitmap = PhotoManager.getBitmap(mFile);
-        photoImage.setImageBitmap(photoBitmap);
-
-        mOrchidImage = (ImageView) view.findViewById(R.id.orchid_header_image);
+        mPhotoImage = (ImageView) view.findViewById(R.id.orchid_photo_image);
         mScienceNameText = (TextView) view.findViewById(R.id.orchid_science_name_text);
         mOtherNameText = (TextView) view.findViewById(R.id.orchid_other_name_text);
         mNativePlaceText = (TextView) view.findViewById(R.id.orchid_native_place_text);
@@ -94,53 +68,10 @@ public class OrchidDetailFragment extends Fragment implements ResponseCallback<A
         mBloomText = (TextView) view.findViewById(R.id.orchid_bloom_text);
         mNatureText = (TextView) view.findViewById(R.id.orchid_nature_text);
 
-        CollapsingToolbarLayout collapsingToolbar =
-                (CollapsingToolbarLayout) view.findViewById(R.id.collapsing_toolbar);
-        collapsingToolbar.setTitle("");
-
         setHasOptionsMenu(true);
 
-        // Set ActionBar
-        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-        toolbar.setTitle("");
-        toolbar.setSubtitle("");
-
-        // Get orchid endpoint
-        callIdentifyOrchidEndpoint(mFile);
-    }
-
-    //region Identify orchid endpoint
-    private void callIdentifyOrchidEndpoint(File photoFile) {
-        ApiManager.identifyOrchid(photoFile, this);
-    }
-
-    @Override
-    public void startRequest() {
-
-        mLoadingDialog = ProgressDialog.show(getActivity(),
-                null,
-                getString(R.string.process_photo),
-                false,
-                false);
-    }
-
-    @Override
-    public void endRequest() {
-        mLoadingDialog.dismiss();
-    }
-
-    @Override
-    public void onSuccess(ApiResponse response) {
-        mOrchid = response.getOrchid();
         bindView();
     }
-
-    @Override
-    public void onFailure() {
-        Toast.makeText(getActivity(), "Call api failed.", Toast.LENGTH_SHORT).show();
-    }
-
     //endregion
 
     private void bindView() {
@@ -180,7 +111,7 @@ public class OrchidDetailFragment extends Fragment implements ResponseCallback<A
                 .load(mOrchid.getOrchidImage())
                 .crossFade()
                 .centerCrop()
-                .into(mOrchidImage);
+                .into(mPhotoImage);
     }
 
 }

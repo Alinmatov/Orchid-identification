@@ -24,8 +24,8 @@ import static java.lang.Thread.sleep;
 public class OrchidActivityTest {
 
     @Rule
-    public ActivityTestRule<OrchidDetailActivity> activityTestRule =
-            new ActivityTestRule<>(OrchidDetailActivity.class, true, false);
+    public ActivityTestRule<OrchidAnalysisResultActivity> activityTestRule =
+            new ActivityTestRule<>(OrchidAnalysisResultActivity.class, true, false);
 
     private MockWebServer mockServer;
 

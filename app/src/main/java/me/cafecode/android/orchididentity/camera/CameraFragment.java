@@ -25,7 +25,7 @@ import com.google.android.cameraview.CameraView;
 
 import java.io.IOException;
 
-import me.cafecode.android.orchididentity.OrchidDetailActivity;
+import me.cafecode.android.orchididentity.OrchidAnalysisResultActivity;
 import me.cafecode.android.orchididentity.R;
 import me.cafecode.android.orchididentity.photo.PhotoManager;
 
@@ -214,6 +214,6 @@ public class CameraFragment extends Fragment implements View.OnClickListener {
     }
 
     private void startOrchidActivity() {
-        startActivity(new Intent(getActivity(), OrchidDetailActivity.class));
+        startActivity(new Intent(getActivity(), OrchidAnalysisResultActivity.class));
     }
 }

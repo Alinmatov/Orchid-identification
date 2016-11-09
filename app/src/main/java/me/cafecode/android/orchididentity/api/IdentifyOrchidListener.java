@@ -17,11 +17,11 @@ public class IdentifyOrchidListener implements Callback<ApiResponse> {
     @Override
     public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
 
-        if (response.body() != null) {
+        if (response.isSuccessful()) {
             final ApiResponse apiResponse = response.body();
             mCallback.onSuccess(apiResponse);
         } else {
-            mCallback.onFailure();
+            mCallback.onFailure(new Throwable("Bad request."));
         }
 
         mCallback.endRequest();
@@ -29,7 +29,7 @@ public class IdentifyOrchidListener implements Callback<ApiResponse> {
 
     @Override
     public void onFailure(Call<ApiResponse> call, Throwable t) {
-        mCallback.onFailure();
+        mCallback.onFailure(t);
         mCallback.endRequest();
     }
 

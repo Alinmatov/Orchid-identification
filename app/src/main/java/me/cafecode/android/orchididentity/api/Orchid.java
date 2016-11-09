@@ -1,8 +1,13 @@
 package me.cafecode.android.orchididentity.api;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
-public class Orchid {
+public class Orchid implements Parcelable {
+
+    public static final String ARG_ORCHID = "orchid";
 
     //region Fields
     @SerializedName("paph_id")
@@ -135,5 +140,55 @@ public class Orchid {
     public void setOrchidImage(String orchidImage) {
         this.orchidImage = orchidImage;
     }
+    //endregion
+
+    //region Parcelable
+    private Orchid(Parcel in) {
+        id = in.readInt();
+        scienceName = in.readString();
+        otherName = in.readString();
+        nativePlace = in.readString();
+        general = in.readString();
+        shoot = in.readString();
+        leaf = in.readString();
+        flower = in.readString();
+        bloom = in.readString();
+        nature = in.readString();
+        photoImage = in.readString();
+        orchidImage = in.readString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel out, int i) {
+        out.writeInt(id);
+        out.writeString(scienceName);
+        out.writeString(otherName);
+        out.writeString(nativePlace);
+        out.writeString(general);
+        out.writeString(shoot);
+        out.writeString(leaf);
+        out.writeString(flower);
+        out.writeString(bloom);
+        out.writeString(nature);
+        out.writeString(photoImage);
+        out.writeString(orchidImage);
+    }
+
+    public static final Parcelable.Creator<Orchid> CREATOR = new Parcelable.Creator<Orchid>() {
+        @Override
+        public Orchid createFromParcel(Parcel parcel) {
+            return new Orchid(parcel);
+        }
+
+        @Override
+        public Orchid[] newArray(int size) {
+            return new Orchid[size];
+        }
+    };
     //endregion
 }
