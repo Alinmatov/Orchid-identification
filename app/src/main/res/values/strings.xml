@@ -50,8 +50,8 @@
     <string name="orchid_detail_shoot"><![CDATA[<strong>ต้น</strong> %s]]></string>
     <string name="orchid_detail_leaf"><![CDATA[<strong>ใบ</strong> %s]]></string>
     <string name="orchid_detail_flower"><![CDATA[<strong>ดอก</strong> %s]]></string>
-    <string name="orchid_detail_bloom"><![CDATA[<strong>Bloom</strong> %s]]></string>
-    <string name="orchid_detail_nature"><![CDATA[<strong>nature</strong> %s]]></string>
+    <string name="orchid_detail_bloom"><![CDATA[<strong>ฤดูออกดอก</strong> %s]]></string>
+    <string name="orchid_detail_nature"><![CDATA[<strong>ลัษณะนิสัย</strong> %s]]></string>
     <string name="photo">ภาพถ่าย</string>
     <string name="picture_taken">Take photo</string>
     <string name="flash_auto">Flash auto</string>
