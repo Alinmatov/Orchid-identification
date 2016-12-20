@@ -57,4 +57,13 @@
     <string name="flash_auto">Flash auto</string>
     <string name="flash_off">Flash off</string>
     <string name="flash_on">Flash on</string>
+    <string name="close">Close</string>
+    <string name="identification_type">Identification Type</string>
+    <string name="preference_file_key">app-preferences</string>
+    <string name="preference_source_key">source</string>
+
+    <string-array name="source_types">
+        <item>Edge</item>
+        <item>Color</item>
+    </string-array>
 </resources>

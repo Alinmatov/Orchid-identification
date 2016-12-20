@@ -4,6 +4,7 @@ package me.cafecode.android.orchididentity.camera;
 import android.Manifest;
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -14,7 +15,9 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +30,7 @@ import java.io.IOException;
 
 import me.cafecode.android.orchididentity.OrchidAnalysisResultActivity;
 import me.cafecode.android.orchididentity.R;
+import me.cafecode.android.orchididentity.dialog.SourceChooserDialog;
 import me.cafecode.android.orchididentity.photo.PhotoManager;
 
 public class CameraFragment extends Fragment implements View.OnClickListener {
@@ -35,6 +39,7 @@ public class CameraFragment extends Fragment implements View.OnClickListener {
     private static final int REQUEST_CAMERA_PERMISSION = 1;
     private static final int REQUEST_SELECT_PICTURE = 12;
 
+    private Context mContext;
     private CameraView mCameraView;
     private Handler mBackgroundHandler;
 
@@ -65,6 +70,12 @@ public class CameraFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mContext = context;
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -76,6 +87,9 @@ public class CameraFragment extends Fragment implements View.OnClickListener {
 
         ImageButton takePhotoButton = (ImageButton) view.findViewById(R.id.capture_button);
         takePhotoButton.setOnClickListener(this);
+
+        ImageButton sourceButton = (ImageButton) view.findViewById(R.id.source_button);
+        sourceButton.setOnClickListener(this);
 
         ImageButton galleryButton = (ImageButton) view.findViewById(R.id.gallery_button);
         galleryButton.setOnClickListener(this);
@@ -171,6 +185,11 @@ public class CameraFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.gallery_button:
                 pickPhotoFromGallery();
+                break;
+            case R.id.source_button:
+                FragmentManager fragmentManager =
+                        ((AppCompatActivity) mContext).getSupportFragmentManager();
+                new SourceChooserDialog().show(fragmentManager, "tag");
                 break;
         }
     }

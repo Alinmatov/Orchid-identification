@@ -13,10 +13,11 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 -->
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <me.cafecode.android.orchididentity.camera.AspectRatioCameraView
         android:id="@+id/cameraview"
@@ -35,12 +36,13 @@
         android:layout_margin="24dp"
         android:background="@drawable/viewfinder_guide"/>
 
-    <FrameLayout
+    <RelativeLayout
         android:id="@+id/control"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_below="@id/cameraview"
         android:background="@color/camera_control_background"
         android:minHeight="112dp">
@@ -49,20 +51,35 @@
             android:id="@+id/capture_button"
             android:layout_width="@dimen/capture_button_size"
             android:layout_height="@dimen/capture_button_size"
-            android:layout_gravity="center"
+            android:layout_centerInParent="true"
+            android:layout_margin="@dimen/margin_large"
             android:background="@drawable/capture_button"
             android:contentDescription="@string/description_info"/>
 
         <ImageButton
             android:id="@+id/gallery_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|right"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/capture_button"
+            android:layout_toRightOf="@+id/capture_button"
             android:background="@android:color/transparent"
             android:contentDescription="@string/description_info"
-            android:padding="20dp"
-            android:src="@drawable/ic_insert_photo_white_48dp"/>
+            android:padding="@dimen/padding_small"
+            android:src="@drawable/ic_gallery_24dp"/>
 
-    </FrameLayout>
+        <ImageButton
+            android:id="@+id/source_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/capture_button"
+            android:layout_toStartOf="@+id/capture_button"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/description_info"
+            android:padding="@dimen/padding_small"
+            android:src="@drawable/ic_source_24dp"/>
+
+    </RelativeLayout>
 
 </RelativeLayout>
