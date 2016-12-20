@@ -11,6 +11,7 @@ import java.io.File;
 
 import me.cafecode.android.orchididentity.api.ApiManager;
 import me.cafecode.android.orchididentity.api.ApiResponse;
+import me.cafecode.android.orchididentity.api.AppPreferences;
 import me.cafecode.android.orchididentity.api.ResponseCallback;
 import me.cafecode.android.orchididentity.photo.PhotoManager;
 import me.cafecode.android.orchididentity.view.OrchidFragmentPagerAdapter;
@@ -31,8 +32,9 @@ public class OrchidAnalysisResultActivity extends AppCompatActivity
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
 
+        AppPreferences appPreferences = new AppPreferences(this);
         File photoFile = PhotoManager.getFile(this);
-        ApiManager.identifyOrchid(photoFile, this);
+        ApiManager.identifyOrchid(photoFile, appPreferences.getSource(), this);
 
 //        OrchidDetailFragment orchidDetailFragment = OrchidDetailFragment.newInstance("Test");
 //        getSupportFragmentManager().beginTransaction()

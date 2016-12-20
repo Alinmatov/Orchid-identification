@@ -17,6 +17,7 @@ import java.io.OutputStream;
 
 import me.cafecode.android.orchididentity.api.ApiManager;
 import me.cafecode.android.orchididentity.api.ApiResponse;
+import me.cafecode.android.orchididentity.api.AppPreferences;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -68,7 +69,7 @@ public class ApiManagerTest {
     @Test
     public void identifyOrchid_shouldSuccess() throws Exception {
 
-        ApiManager.identifyOrchid(photoFile).enqueue(new Callback<ApiResponse>() {
+        ApiManager.identifyOrchid(photoFile, AppPreferences.TYPE_EDGE).enqueue(new Callback<ApiResponse>() {
             @Override
             public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
                 fail("Unexpected this error.");
